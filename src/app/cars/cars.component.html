@@ -1,0 +1,21 @@
+
+<!-- <button [disabled]="!canAddCar">Добавить машину</button> -->
+<input type="text" name="" [(ngModel)]="carName">
+
+<button (click)="addCar()">Добавить машину</button>
+<!-- <p>{{addCarStatus}}</p> -->
+<p *ngIf="!addCarStatus; else sucsessStatus">Машина не добавлена</p>
+<ng-template #sucsessStatus>
+	<p>Машина {{carName}} добавлена</p>
+</ng-template>
+
+<hr>
+
+
+
+<hr>
+<input type="text" name="" (input)="onKeyUp($event)">
+<p>{{inputText}}</p>
+<hr>
+
+<app-car *ngFor="let car of cars"></app-car>
