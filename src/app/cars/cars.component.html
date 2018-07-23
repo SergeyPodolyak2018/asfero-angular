@@ -19,3 +19,26 @@
 <hr>
 
 <app-car *ngFor="let car of cars"></app-car>
+		
+<table>
+	<tr *ngFor="let user of users">
+		<td>{{user._id}}</td>
+		<td>{{user._source.name}}</td>
+		<td>{{user._source.surname}}</td>
+		<td>{{user._source.birthday}}</td>
+		<td>{{user._source.contact}}</td>
+		<td>{{user._source.last_modified_date}}</td>	
+	</tr>
+</table>
+
+<div>
+	<div *ngFor="let user of users" style="display: flex;">
+		<!-- <div><p>{{user._id}}</p></div> -->
+		<div><p>{{user._source.name}}</p></div>
+		<div><p>{{user._source.surname}}</p></div>
+		<div><p>{{user._source.birthday}}</p></div>
+		<div><p>{{user._source.contact}}</p></div>
+		<div><p>{{user._source.last_modified_date}}</p></div>
+		<div><button (click)="dell(user._id)">Удалить</button></div>	
+	</div>
+</div>
