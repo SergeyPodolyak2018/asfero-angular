@@ -1,39 +1,20 @@
 
-<!-- <button [disabled]="!canAddCar">Добавить машину</button> -->
-<!-- <input type="text" name="" [(ngModel)]="carName">
-
-<button (click)="addCar()">Добавить машину</button> -->
-<!-- <p>{{addCarStatus}}</p> -->
-<!-- <p *ngIf="!addCarStatus; else sucsessStatus">Машина не добавлена</p>
-<ng-template #sucsessStatus>
-	<p>Машина {{carName}} добавлена</p>
-</ng-template>
-
-<hr> -->
-
-
-
-<!-- <hr>
-<input type="text" name="" (input)="onKeyUp($event)">
-<p>{{inputText}}</p>
-<hr> -->
-
-<!-- <app-car *ngFor="let car of cars"></app-car> -->
-		
-
 <div class="tableWindow">
 	<div class="tableRow tableRowHeader">		
-		<div><p>Имя</p></div>
-		<div><p>Фамилия</p></div>
-		<div><p>Дата рождения</p></div>
-		<div><p>Телефон</p></div>		
-		<div><p>Удаление</p></div>	
+		<div style="width: 20%"><p>Имя</p></div>
+		<div style="width: 25%"><p>Фамилия</p></div>
+		<div style="width: 20%"><p>Дата рождения</p></div>
+		<div style="width: 30%"><p>Телефон</p></div>		
+		<div class="Adder" (click)="AddUser()"><p>Add</p></div>
 	</div>
 	<div *ngFor="let user of users" class="tableRow tableRowActiv">		
-		<div><p>{{user._source.name}}</p></div>
-		<div><p>{{user._source.surname}}</p></div>
-		<div><p>{{user._source.birthday}}</p></div>
-		<div><p>{{user._source.contact}}</p></div>		
-		<div><button (click)="dell(user._id)">Удалить</button></div>	
+		<div style="width: 20%"><p>{{user._source.name}}</p></div>
+		<div style="width: 25%"><p>{{user._source.surname}}</p></div>
+		<div style="width: 20%"><p>{{user._source.birthday}}</p></div>
+		<div style="width: 30%"><p>{{user._source.contact}}</p></div>		
+		<div style="width: 10%" class="hideButton"><button (click)="dellUser(user._id)">Удалить</button></div>	
 	</div>
+	
 </div>
+
+<app-user-form *ngIf="addUserForm"></app-user-form>
