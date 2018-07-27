@@ -6,101 +6,137 @@ import { Component, OnInit } from '@angular/core';
 @Injectable()
 export class UsersService {
 	
-	 users=[//{
- //        "_index": "asferro",
- //        "_type": "user",
- //        "_id": "M2MDuWQBK_DkwhF8uqOV",
- //        "_score": 0.18232156,
- //        "_source": {
- //          "name": "Her",
- //          "surname": "Hero2w",
- //          "birthday": "2000-10-15",
- //          "contact": "+380983343804",
- //          "email": "s.her@her.com",
- //          "last_modified_date": "2018-07-20"
- //        }
- //      },
- //      {
- //        "_index": "asferro",
- //        "_type": "user",
- //        "_id": "92cjvmQBQkNE0rGWjcLK",
- //        "_score": 0.18232156,
- //        "_source": {
- //          "name": "Her",
- //          "surname": "Hero22w",
- //          "birthday": "2000-10-15",
- //          "contact": "+380983343804",
- //          "email": "s.her@her.com",
- //          "last_modified_date": "2018-07-20"
- //        }
- //      },
- //      {
- //        "_index": "asferro",
- //        "_type": "user",
- //        "_id": "MmMDuWQBK_DkwhF8lqOM",
- //        "_score": 0.18232156,
- //        "_source": {
- //          "name": "Her",
- //          "surname": "Herow",
- //          "birthday": "2000-10-15",
- //          "contact": "+380983343804",
- //          "email": "s.her@her.com",
- //          "last_modified_date": "2018-07-20"
- //        }
- //      },
- //      {
- //        "_index": "asferro",
- //        "_type": "user",
- //        "_id": "NGMDuWQBK_DkwhF8zKNW",
- //        "_score": 0.18232156,
- //        "_source": {
- //          "name": "Her",
- //          "surname": "Hero22w",
- //          "birthday": "2000-10-15",
- //          "contact": "+380983343804",
- //          "email": "s.her@her.com",
- //          "last_modified_date": "2018-07-20"
- //        }
- //      }
-    ];
+	users=[];
+	bufFixUser={
+		id:'',
+		name:'',
+		surname:'',
+		birthday:'',
+		contact:'',
+		email:'',
+    };
+    visibility={
+    	addUser:false,
+    	fixUser:false,
+    }
 
     constructor(private HttpClient:HttpClient){}
     
     ngOnInit(): void{	
-		// this.HttpClient.get('http://jsonplaceholder.typicode.com/posts').subscribe(data => {		
-		// 	console.log(data);		
-		// });
-		//this.getUser();
+		
 	}
     
 
     getUser(){    	
-    	this.HttpClient.get('/serchOll/').subscribe(data => {
+    	this.HttpClient.get('/serchOll/').subscribe(data => {    		
 			let temp=data['hits'];
+			let remuved=this.users.splice(0, this.users.length);    			
 			for(let i in temp){				
 				this.users.push(temp[i]);
 			}			
 		});
     }
 
+    fillFormForFixeblUser(id){
+    	console.log(id);
+    	console.log('getFixeblUser');
+    	this.bufFixUser.id=id;
+    	let tempIndex=getIndex(this.users,id);
+    	let tempObject=Object.assign({},this.users[tempIndex]['_source']);
+    	console.log(tempObject)
+    	for(let i in tempObject){
+    					
+			if(this.bufFixUser[i]!==undefined){
+				console.log(i);				
+				this.bufFixUser[i]=tempObject[i];				
+			}
+		}
+    }
+
 		
 
-    addUser(name, surname, birthday, contact){    	
-    	this.HttpClient.post('/addUser/',{
-    		name:name,
-    		surname:surname,
-    		birthday:birthday,
-    		contact:contact,
-    	}).subscribe(data => {		
-			console.log(data);		
+    addUser(userFile){
+    	let userStructura={
+	        _index: "asferro",
+	        _type: "user",
+	        _id: "",
+	        _score: 0.18232156,
+	        _source: {
+	          name: "",
+	          surname: "",
+	          birthday: "",
+	          contact: "",
+	          email: "",
+	          last_modified_date: ""
+	      	}
+        };
+    	this.HttpClient.post('/addUser/',userFile).subscribe(data => {    		
+			if(data['result']=='created'){ 
+				console.log('created');
+				userStructura._id=data['_id'];
+				for(let i in userFile){
+					userStructura._source[i]=userFile[i];
+				}
+				// userStructura._source.name=userFile.name;
+				// userStructura._source.surname=userFile.surname;
+				// userStructura._source.birthday=userFile.birthday;
+				// userStructura._source.contact=cuserFile.contact;	
+				// userStructura._source.email=cuserFile.email;				
+				this.users.push(userStructura);
+				this.visibility.addUser=false;
+
+    		}else{
+    			console.log('error not created');
+    		}		
 		});
     }
 
-	dellUser(id){    	
-	    	this.HttpClient.delete('/delleteById/?id='+id).subscribe(data => {		
-				console.log(data);		
-			});
-	    }
+	dellUser(id){
+		let tempId=id;    	
+    	this.HttpClient.delete('/delleteById/?id='+tempId).subscribe(data => {	
+    		if(data['result']=='deleted'){    			
+    			let notEqualElement=this.users.filter(x => x['_id'] !== data['_id']);
+    			let remuved=this.users.splice(0, this.users.length);
+    			this.users.push.apply( this.users, notEqualElement );
+    		}else{
+    			console.log(data);
+    		}
+		});
+	}
+
+	 fixUser(userTempObject){
+    	
+    	this.HttpClient.put('/fixUser/',userTempObject).subscribe(data => {  
+    		console.log(data);  		
+			if(data['result']=='updated'){ 
+				console.log('updated');
+				let tempIndex=getIndex(this.users,userTempObject.id);
+				let tempObject=Object.assign({},this.bufFixUser);
+				console.log(tempObject);
+				for(let i in this.users[tempIndex]['_source']){
+					if(tempObject[i]!==undefined){						
+						this.users[tempIndex]['_source'][i]=tempObject[i];
+						this.bufFixUser[i]='';
+					}
+				}
+				console.log(this.users);
+				this.visibility.fixUser=false;
+			}else{
+				console.log('error not updated');
+			}		
+		});
+    }
+}
 
 
+
+function getIndex(arr, value) {
+	let index;
+    for(var i = 0; i < arr.length; i++) {
+        if(arr[i]['_id'] === value) {
+            index=i;
+            break;
+        }
+    }
+    return index;
 }

@@ -7,26 +7,24 @@ import { UsersService} from '../users.service';
   styleUrls: ['./user-form.component.css']
 })
 export class UserFormComponent implements OnInit {
-	name='';
-	soname='';
-	birthdate='';
-	contact='';
+	user={
+		name:'',
+		surname:'',
+		birthday:'',
+		contact:'',
+		email:'',
+	}
 
   constructor(private service:UsersService) { }
 
   ngOnInit() {
   }
 
-	addUser(){		
-		console.log(this.name);
-		console.log(this.soname);
-		console.log(this.birthdate);
-		console.log(this.contact);
-		this.service.addUser(this.name,this.soname,this.birthdate,this.contact);
-		this.name='';
-		this.soname='';
-		this.birthdate='';
-		this.contact='';
+	addUser(){
+		this.service.addUser(Object.assign({},this.user));
+		for(let i in this.user){
+			this.user[i]='';
+		}
 	}
 
 	

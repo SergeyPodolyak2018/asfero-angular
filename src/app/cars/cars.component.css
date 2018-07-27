@@ -14,7 +14,7 @@ a{
 
 
 .tableWindow{
-	width: 900px;
+	max-width: 1200px;
 	height: auto;
 	margin: 50px auto;
 	padding: 15px;
@@ -28,7 +28,7 @@ a{
 .tableRow{
 	width: 100%;
 	display: flex;
-	justify-content: space-around;
+	justify-content: center;
 	align-items: center; 
 	padding-left: 10px 10px;
 	/* padding-right: 10px; */

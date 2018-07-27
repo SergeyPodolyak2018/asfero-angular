@@ -8,6 +8,7 @@ import { CarsComponent } from './cars/cars.component';
 import { CarComponent } from './car/car.component';
 import { UserFormComponent } from './user-form/user-form.component';
 import { UsersService} from './users.service';
+import { FixUserFormComponent } from './fix-user-form/fix-user-form.component';
 
 
 @NgModule({
@@ -15,7 +16,8 @@ import { UsersService} from './users.service';
     AppComponent,
     CarsComponent,
     CarComponent,
-    UserFormComponent
+    UserFormComponent,
+    FixUserFormComponent
   ],
   imports: [
     BrowserModule,

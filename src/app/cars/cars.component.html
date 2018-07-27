@@ -1,20 +1,27 @@
 
 <div class="tableWindow">
 	<div class="tableRow tableRowHeader">		
-		<div style="width: 20%"><p>Имя</p></div>
-		<div style="width: 25%"><p>Фамилия</p></div>
-		<div style="width: 20%"><p>Дата рождения</p></div>
-		<div style="width: 30%"><p>Телефон</p></div>		
+		<div style="width: 10%"><p>Имя</p></div>
+		<div style="width: 15%"><p>Фамилия</p></div>
+		<div style="width: 15%"><p>Дата рождения</p></div>
+		<div style="width: 15%"><p>Телефон</p></div>
+		<div style="width: 20%"><p>Почта</p></div>		
 		<div class="Adder" (click)="AddUser()"><p>Add</p></div>
 	</div>
 	<div *ngFor="let user of users" class="tableRow tableRowActiv">		
-		<div style="width: 20%"><p>{{user._source.name}}</p></div>
-		<div style="width: 25%"><p>{{user._source.surname}}</p></div>
-		<div style="width: 20%"><p>{{user._source.birthday}}</p></div>
-		<div style="width: 30%"><p>{{user._source.contact}}</p></div>		
-		<div style="width: 10%" class="hideButton"><button (click)="dellUser(user._id)">Удалить</button></div>	
+		<div style="width: 10%"><p>{{user._source.name}}</p></div>
+		<div style="width: 15%"><p>{{user._source.surname}}</p></div>
+		<div style="width: 15%"><p>{{user._source.birthday}}</p></div>
+		<div style="width: 15%"><p>{{user._source.contact}}</p></div>
+		<div style="width: 20%"><p>{{user._source.email}}</p></div>		
+		<div style="width: 10%" class="hideButton">
+			<button (click)="dellUser(user._id)" class="dellButton" >Удалить</button>
+			<button (click)="fixUser(user._id)" class="dellButton" >Редакт.</button>
+
+		</div>	
 	</div>
 	
 </div>
 
-<app-user-form *ngIf="addUserForm"></app-user-form>
+<app-user-form *ngIf="visibl.addUser"></app-user-form>
+<app-fix-user-form *ngIf="visibl.fixUser"></app-fix-user-form>

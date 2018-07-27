@@ -9,12 +9,16 @@ import { UsersService} from '../users.service';
 })
 export class CarsComponent implements OnInit{	  
 	users=[];
-	addUserForm=false;  
+  visibl={
+    addUser:false,
+    fixUser:false,
+  };	
 
 	constructor(private usersList:UsersService){}
 
 	ngOnInit(){
     this.users=this.usersList.users;
+    this.visibl=this.usersList.visibility;
     this.usersList.getUser();
   }	
 
@@ -23,10 +27,20 @@ export class CarsComponent implements OnInit{
 	}
 
   AddUser(){
-    if(this.addUserForm){
-      this.addUserForm=false;
+    if(this.visibl.addUser){
+      this.visibl.addUser=false;
     }else{
-      this.addUserForm=true;
+      this.visibl.addUser=true;
     }   
+  }
+
+  fixUser(id){
+    if(this.visibl.fixUser){
+      this.visibl.fixUser=false;
+    }else{
+      this.visibl.fixUser=true;
+      this.usersList.fillFormForFixeblUser(id);
+    }
+       
   }
 }
