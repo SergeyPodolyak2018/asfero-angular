@@ -26,8 +26,4 @@ export class UserFormComponent implements OnInit {
 			this.user[i]='';
 		}
 	}
-
-	
-
-
 }

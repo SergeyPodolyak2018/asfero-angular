@@ -1,0 +1,26 @@
+
+<div class="tableWindow">
+	<div class="tableRow tableRowHeader">		
+		<div style="width: 10%"><p>Имя</p></div>
+		<div style="width: 15%"><p>Фамилия</p></div>
+		<div style="width: 15%"><p>Дата рождения</p></div>
+		<div style="width: 15%"><p>Телефон</p></div>
+		<div style="width: 20%"><p>Почта</p></div>		
+		<div class="Adder" (click)="AddUser()"><p>Add</p></div>
+	</div>
+	<div *ngFor="let user of users" class="tableRow tableRowActiv">		
+		<div style="width: 10%"><p>{{user._source.name}}</p></div>
+		<div style="width: 15%"><p>{{user._source.surname}}</p></div>
+		<div style="width: 15%"><p>{{user._source.birthday}}</p></div>
+		<div style="width: 15%"><p>{{user._source.contact}}</p></div>
+		<div style="width: 20%"><p>{{user._source.email}}</p></div>		
+		<div style="width: 10%" class="hideButton">
+			<div (click)="dellUser(user._id)" class="dellButton" ><img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAB4AAAAeCAYAAAA7MK6iAAAAAXNSR0IArs4c6QAAAARnQU1BAACxjwv8YQUAAAAJcEhZcwAADsMAAA7DAcdvqGQAAAEZSURBVEhL7dbNDYJAEAVgurAGLWNDaIIKOFMITWHAAvSqHjxzNNEYnUd2EgPsH8zKxZdMDOvOfMSLk/yzapo03VLtG6U2+ig46KUZdavUTh/ZA7TNsu6U50/6vM7B0XPIsoue0WGm/mo6jN7K8nWvqve5KB6hOKPoxQzMcuIt/bxHeks0cIXgQ5QLMzFbXxsHjUCGjT64CfV+cRuOwVMDFqOcEFwM5fjg4ijHNhjnUVCODY+Gckz4d4mjHBseDUVWgW0olzhuQvE8dSaC21AAKHHcheJ7lCjug+qr/V0TjhneeAjKWYzPQTmLcPqzrrGuDBtdKMf04v0KRLP1tXGwmBEivvrQc+dc+qSXPS+UA5zqt+vtP3GSJB8dMjDEDq+o8wAAAABJRU5ErkJggg=="></div>
+			<div (click)="fixUser(user._id)" class="dellButton" ><img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAB4AAAAeCAYAAAA7MK6iAAAAAXNSR0IArs4c6QAAAARnQU1BAACxjwv8YQUAAAAJcEhZcwAADsMAAA7DAcdvqGQAAAI3SURBVEhLvdZJjw1RHIbxax4iQZtJJxJfgAW9QrAWcySGRvgGFlboiKVdLzsSNiIIIoKNNTFHzAmWlixYmD2P1D85Kl2369xb15v8ku7TnfNW1ak6Va0eZSPOYRhLHfgfOYLfiY9YiZ5mMu4jLdYn9KTcwpOYWagqX4XGMhU34OR3YfEsPCjGyuWNnfkEnEFMHuWzMVr5O0xBx7HwFPqLn6vKHxZjqRXoKBadh5O8gWtcVd6HR8WYvmM+sjMRF+AkP7ADZjzqlB9DdibhIuLIo3QDnHgRqsrn4DCy4+W8hCjdDmPpFzj+Cu3Ks2PpZTjJN0TpekSpXmMJTFr+Et6EWbH0Ksql61BVuhNxt7um85AVS68hSrfBjFa6GOYAvOneIvssjaXX4cRfEaVrkZa6rlG6H5bGwcQVqB13ltgGLd0KU7c0Ha8d996biNItMGtQLvUONvsQpd5IMV4703ALY5Wmkw8iSl9gIbLimt5GlG6GsfQzxip9jgXIjkVRuskBshrl0jijvYjSZ+ho/zUjcBL3YVMuTS/jHkTpU2Q/pxE3+A9wIm+UcTiO2NirSp+g41IzACf6ifSSLYelsXa7EaWPMRdd5QSczM08zXRE6S5EqVfCt03Xia+Eo39/+ze+fw8iSv1f369dxx3mF5z0LFxv19OdyHevH2j+TX5D+TnTSA4hJtZ7xIEEHzG30OzNoV2uIC0J3uWn4cthBhrPHVjkWd7DEPz29ZHqaZbBx6TRy9g+rdYfVunuNGHzjagAAAAASUVORK5CYII="></div>
+		</div>	
+	</div>
+	
+</div>
+
+<app-user-form *ngIf="visibl.addUser"></app-user-form>
+<app-fix-user-form *ngIf="visibl.fixUser"></app-fix-user-form>

@@ -1,14 +1,13 @@
-import { Component, OnInit} from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { UsersService} from '../users.service';
 
-
 @Component({
-  selector: 'app-cars',
-  templateUrl: './cars.component.html',
-  styleUrls: ['./cars.component.css']
+  selector: 'app-users',
+  templateUrl: './users.component.html',
+  styleUrls: ['./users.component.css']
 })
-export class CarsComponent implements OnInit{	  
-	users=[];
+export class UsersComponent implements OnInit {
+users=[];
   visibl={
     addUser:false,
     fixUser:false,
@@ -43,4 +42,5 @@ export class CarsComponent implements OnInit{
     }
        
   }
+
 }

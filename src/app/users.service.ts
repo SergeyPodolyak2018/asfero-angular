@@ -37,15 +37,11 @@ export class UsersService {
 		});
     }
 
-    fillFormForFixeblUser(id){
-    	console.log(id);
-    	console.log('getFixeblUser');
+    fillFormForFixeblUser(id){    	
     	this.bufFixUser.id=id;
     	let tempIndex=getIndex(this.users,id);
-    	let tempObject=Object.assign({},this.users[tempIndex]['_source']);
-    	console.log(tempObject)
-    	for(let i in tempObject){
-    					
+    	let tempObject=Object.assign({},this.users[tempIndex]['_source']);    	
+    	for(let i in tempObject){    					
 			if(this.bufFixUser[i]!==undefined){
 				console.log(i);				
 				this.bufFixUser[i]=tempObject[i];				
@@ -76,12 +72,7 @@ export class UsersService {
 				userStructura._id=data['_id'];
 				for(let i in userFile){
 					userStructura._source[i]=userFile[i];
-				}
-				// userStructura._source.name=userFile.name;
-				// userStructura._source.surname=userFile.surname;
-				// userStructura._source.birthday=userFile.birthday;
-				// userStructura._source.contact=cuserFile.contact;	
-				// userStructura._source.email=cuserFile.email;				
+				}						
 				this.users.push(userStructura);
 				this.visibility.addUser=false;
 
@@ -104,22 +95,17 @@ export class UsersService {
 		});
 	}
 
-	 fixUser(userTempObject){
-    	
-    	this.HttpClient.put('/fixUser/',userTempObject).subscribe(data => {  
-    		console.log(data);  		
-			if(data['result']=='updated'){ 
-				console.log('updated');
+	 fixUser(userTempObject){    	
+    	this.HttpClient.put('/fixUser/',userTempObject).subscribe(data => {     				
+			if(data['result']=='updated'){ 				
 				let tempIndex=getIndex(this.users,userTempObject.id);
-				let tempObject=Object.assign({},this.bufFixUser);
-				console.log(tempObject);
+				let tempObject=Object.assign({},this.bufFixUser);				
 				for(let i in this.users[tempIndex]['_source']){
 					if(tempObject[i]!==undefined){						
 						this.users[tempIndex]['_source'][i]=tempObject[i];
 						this.bufFixUser[i]='';
 					}
-				}
-				console.log(this.users);
+				}				
 				this.visibility.fixUser=false;
 			}else{
 				console.log('error not updated');

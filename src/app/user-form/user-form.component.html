@@ -13,11 +13,10 @@
 		<form method="post" action="#" class="fieldsContainer">
 			<input type="text" name="name" placeholder ="Имя" autocomplete="off" class="formFields" [(ngModel)]="user.name">
 			<input type="text" name="soname" placeholder ="Фамилия" autocomplete="off" class="formFields" [(ngModel)]="user.surname">
-			<input type="text" name="birthdate" placeholder ="Дата рождения" autocomplete="off" class="formFields" [(ngModel)]="user.birthday">			
+			<input type="date" name="birthdate" placeholder ="Дата рождения" autocomplete="off" class="formFields" [(ngModel)]="user.birthday">			
 			<input type="tel" name="contact" placeholder="+38 (098) 123-45-67" pattern="\+38\s?[\(]{0,1}0[0-9]{2}[\)]{0,1}\s?\d{3}[-]{0,1}\d{2}[-]{0,1}\d{2}" autocomplete="off" class="formFields" [(ngModel)]="user.contact">
 			<input type="email" name="contact" placeholder="mail@rambler.com" autocomplete="off" class="formFields" [(ngModel)]="user.email">
-			<button type="submit" name="" class="formButton" (click)="addUser()">Добавить</button>
-			<!-- <button type="submit" name="" class="formButton" (click)="getUser()">Добавить</button> -->
+			<button type="submit" name="" class="formButton" (click)="addUser()">Добавить</button>			
 			
 		</form>
 	</main>

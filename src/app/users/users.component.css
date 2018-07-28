@@ -14,7 +14,7 @@ a{
 
 
 .tableWindow{
-	max-width: 1200px;
+	max-width: 950px;
 	height: auto;
 	margin: 50px auto;
 	padding: 15px;
@@ -50,14 +50,31 @@ a{
 }
 
 .tableRowActiv:hover .hideButton{
-	display:block;
+	display:flex;
+	justify-content: space-between;
+	align-items: center;
 	right:0;
-
 }
 
 .hideButton{
 	position:absolute;
 	display:none;
+}
+
+.dellButton{
+	width:30px;
+	height:30px;
+	border-radius:50%;
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	background-color: #405d9a;
+
+
+}
+.dellButton img{
+	width:15px;
+	height:15px;
 }
 
 .Adder{
@@ -69,10 +86,7 @@ a{
 	top:50%;
 	transform:translateY(-50%);
 	right:-30px;
-	display:none;
-	
-	
-	
+	display:none;	
 }
 
 .tableRowHeader:hover .Adder{
